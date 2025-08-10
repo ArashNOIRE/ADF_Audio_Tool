@@ -39,7 +39,7 @@ python converter.py
   bash build_linux.sh
 ```
 
-- Compiled output will be in the dist/ directory.
+- Compiled output will be in the ```dist/``` directory.
 
 ---
 
@@ -64,3 +64,4 @@ You are free to use, modify, and distribute it for any purpose.
 This tool does not contain any copyrighted game files.
 
 You can use it to replace or restore your own GTA Vice City radio tracks.
+
