@@ -8,9 +8,9 @@ def xor_file(input_path, output_path):
             while byte:
                 f_out.write(bytes([byte[0] ^ 0x22]))
                 byte = f_in.read(1)
-        messagebox.showinfo("موفقیت", f"تبدیل با موفقیت انجام شد:\n{output_path}")
+        messagebox.showinfo("Success", f"Conversion completed successfully:\n{output_path}")
     except Exception as e:
-        messagebox.showerror("خطا", str(e))
+        messagebox.showerror("Error", str(e))
 
 def select_input_file():
     file_path = filedialog.askopenfilename(filetypes=[("MP3 files", "*.mp3"), ("ADF files", "*.adf")])
@@ -28,10 +28,10 @@ def convert_mp3_to_adf():
     input_path = input_entry.get()
     output_path = output_entry.get()
     if not input_path.endswith(".mp3"):
-        messagebox.showerror("خطا", "فایل ورودی باید mp3 باشد.")
+        messagebox.showerror("Error", "Input file must be an MP3.")
         return
     if not output_path.endswith(".adf"):
-        messagebox.showerror("خطا", "فایل خروجی باید adf باشد.")
+        messagebox.showerror("Error", "Output file must be an ADF.")
         return
     xor_file(input_path, output_path)
 
@@ -39,32 +39,32 @@ def convert_adf_to_mp3():
     input_path = input_entry.get()
     output_path = output_entry.get()
     if not input_path.endswith(".adf"):
-        messagebox.showerror("خطا", "فایل ورودی باید adf باشد.")
+        messagebox.showerror("Error", "Input file must be an ADF.")
         return
     if not output_path.endswith(".mp3"):
-        messagebox.showerror("خطا", "فایل خروجی باید mp3 باشد.")
+        messagebox.showerror("Error", "Output file must be an MP3.")
         return
     xor_file(input_path, output_path)
 
-# ساخت پنجره اصلی
+# Create main window
 root = tk.Tk()
-root.title("تبدیل MP3 <-> ADF برای GTA VC")
+root.title("MP3 <-> ADF Converter for GTA VC")
 
-# فیلد انتخاب فایل ورودی
-tk.Label(root, text="فایل ورودی:").grid(row=0, column=0, padx=5, pady=5, sticky='e')
+# Input file field
+tk.Label(root, text="Input File:").grid(row=0, column=0, padx=5, pady=5, sticky='e')
 input_entry = tk.Entry(root, width=50)
 input_entry.grid(row=0, column=1, padx=5, pady=5)
-input_btn = tk.Button(root, text="انتخاب فایل", command=select_input_file)
+input_btn = tk.Button(root, text="Select File", command=select_input_file)
 input_btn.grid(row=0, column=2, padx=5, pady=5)
 
-# فیلد انتخاب فایل خروجی
-tk.Label(root, text="فایل خروجی:").grid(row=1, column=0, padx=5, pady=5, sticky='e')
+# Output file field
+tk.Label(root, text="Output File:").grid(row=1, column=0, padx=5, pady=5, sticky='e')
 output_entry = tk.Entry(root, width=50)
 output_entry.grid(row=1, column=1, padx=5, pady=5)
-output_btn = tk.Button(root, text="انتخاب محل ذخیره", command=select_output_file)
+output_btn = tk.Button(root, text="Select Save Location", command=select_output_file)
 output_btn.grid(row=1, column=2, padx=5, pady=5)
 
-# دکمه‌ها برای تبدیل
+# Conversion buttons
 convert_mp3_btn = tk.Button(root, text="MP3 → ADF", command=convert_mp3_to_adf)
 convert_mp3_btn.grid(row=2, column=1, pady=10, sticky='w')
 
