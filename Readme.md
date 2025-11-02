@@ -10,18 +10,6 @@ A simple Python tool with a minimal GUI to convert between `.mp3` and `.adf` aud
 
 ---
 
-##  Project Structure
-├── converter.py # Main script with GUI
-├── requirements.txt # Additional dependencies if any
-├── build_windows.sh # Docker-based Windows build script
-├── build_linux.sh # Docker-based Linux build script
-├── build_macos.sh # Native macOS build script
-├── README.md # This file
-├── .gitignore # Ignored files/folders
-└── dist/ # Output binaries (ignored)
-
----
-
 ## 🔧 Usage
 
 ### 1. Running from Python
@@ -64,4 +52,5 @@ You are free to use, modify, and distribute it for any purpose.
 This tool does not contain any copyrighted game files.
 
 You can use it to replace or restore your own GTA Vice City radio tracks.
+
 
