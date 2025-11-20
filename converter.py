@@ -1,13 +1,15 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
+import os
 
 # -------------------------------
 # XOR function:
 # Reads the input file byte by byte,
 # XORs each byte with 0x22, and writes it to the output file.
 # The operation is reversible: applying it twice restores the original file.
+# Optionally deletes the input file after successful conversion if delete_original is True.
 # -------------------------------
-def xor_file(input_path, output_path):
+def xor_file(input_path, output_path, delete_original=False):
     try:
         # Open both input and output files in binary mode
         with open(input_path, 'rb') as f_in, open(output_path, 'wb') as f_out:
@@ -17,8 +19,18 @@ def xor_file(input_path, output_path):
                 f_out.write(bytes([byte[0] ^ 0x22]))
                 byte = f_in.read(1)  # Read next byte
 
+        # Delete the original file if requested
+        if delete_original:
+            try:
+                os.remove(input_path)
+                success_msg = f"Conversion completed successfully:\n{output_path}\n\nOriginal file deleted."
+            except Exception as delete_error:
+                success_msg = f"Conversion completed successfully:\n{output_path}\n\nWarning: Could not delete original file:\n{str(delete_error)}"
+        else:
+            success_msg = f"Conversion completed successfully:\n{output_path}"
+
         # Show success message when conversion finishes
-        messagebox.showinfo("Success", f"Conversion completed successfully:\n{output_path}")
+        messagebox.showinfo("Success", success_msg)
 
     except Exception as e:
         # Show an error message if something goes wrong (e.g., file not found, permission error)
@@ -69,7 +81,8 @@ def convert_mp3_to_adf():
         return
 
     # Perform the XOR conversion
-    xor_file(input_path, output_path)
+    delete_original = delete_original_var.get()
+    xor_file(input_path, output_path, delete_original)
 
 
 # -------------------------------
@@ -89,7 +102,8 @@ def convert_adf_to_mp3():
         return
 
     # Perform the XOR conversion
-    xor_file(input_path, output_path)
+    delete_original = delete_original_var.get()
+    xor_file(input_path, output_path, delete_original)
 
 
 # -------------------------------
@@ -114,12 +128,17 @@ output_entry.grid(row=1, column=1, padx=5, pady=5)
 output_btn = tk.Button(root, text="Select Save Location", command=select_output_file)
 output_btn.grid(row=1, column=2, padx=5, pady=5)
 
+# --- Delete original file option ---
+delete_original_var = tk.BooleanVar()
+delete_original_check = tk.Checkbutton(root, text="Delete original file after conversion", variable=delete_original_var)
+delete_original_check.grid(row=2, column=0, columnspan=3, padx=5, pady=5, sticky='w')
+
 # --- Conversion buttons ---
 convert_mp3_btn = tk.Button(root, text="MP3 → ADF", command=convert_mp3_to_adf)
-convert_mp3_btn.grid(row=2, column=1, pady=10, sticky='w')
+convert_mp3_btn.grid(row=3, column=1, pady=10, sticky='w')
 
 convert_adf_btn = tk.Button(root, text="ADF → MP3", command=convert_adf_to_mp3)
-convert_adf_btn.grid(row=2, column=1, pady=10, sticky='e')
+convert_adf_btn.grid(row=3, column=1, pady=10, sticky='e')
 
 # Start the Tkinter event loop (keeps the window running)
 root.mainloop()
