@@ -6,7 +6,6 @@ A simple Python tool with a minimal GUI to convert between `.mp3` and `.adf` aud
 - Convert **MP3 → ADF** and **ADF → MP3**
 - Minimal and user-friendly GUI (Tkinter)
 - Works without Python installed after building with PyInstaller
-- Cross-platform builds for Windows, Linux
 
 ---
 
@@ -14,17 +13,17 @@ A simple Python tool with a minimal GUI to convert between `.mp3` and `.adf` aud
 
 ### 1. Running from Python
 ```bash
-python converter.py
+  python converter.py
+```
+Or
+```bash
+  python3 converter.py
 ```
 
 ### 2. Building Executables
-- Windows (.exe) from any OS:
+- **On Windows and Linux and MacOS:**
 ```bash
-  bash build_windows.sh
-```
-- Linux binary from any OS:
-```bash
-  bash build_linux.sh
+  pyinstaller --onefile --noconsole --icon=icon.ico converter.py
 ```
 
 - Compiled output will be in the ```dist/``` directory.
@@ -35,8 +34,6 @@ python converter.py
 - Python 3.8+ (for running from source)
 
 - PyInstaller (for building executables)
-
-- Docker (for cross-platform builds on Linux/Windows)
 
 ---
 
