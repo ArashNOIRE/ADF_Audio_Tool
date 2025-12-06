@@ -53,4 +53,7 @@ This tool does not contain any copyrighted game files.
 
 You can use it to replace or restore your own GTA Vice City radio tracks.
 
+---
 
+## Source
+[GTAMods](https://gtamods.com/wiki/ADF)
